@@ -30,11 +30,11 @@ export default function Posts({post}) {
 
 
 export async function getStaticPaths() {
-  const res = await fetch('http://localhost:3000/api/v1/posts')
+  const res = await fetch('https://jsonplaceholder.typicode.com/posts?_limit=20')
   const data = await res.json()
   const paths = data.map(d => {
         return {
-          params: {id: d.id <= 20 ? `${d.id}` : ""}
+          params: {id: `${d.id}`}
         }
   })
   return{
@@ -45,13 +45,11 @@ export async function getStaticPaths() {
 
 
 export async function getStaticProps(context) {
-  const res = await fetch(`http://localhost:3000/api/v1/posts`)
+  const res = await fetch(`https://jsonplaceholder.typicode.com/posts/${context.params.id}`)
   const data = await res.json()
-  const post2 = data.find(d => d.id == context.params.id)
-  console.log(context)
   return{
     props: {
-      post: post2
+      post: data
     }
   }
 }
