@@ -6,10 +6,10 @@ export default function Posts({post, urlId, pros}) {
     <>
       <Layout title={`ZVINZV - Post num ${post.id}`}>
         <div className='bg-zinc-900 text-white flex justify-center items-center flex-col gap-8 py-14'>
-          <h1 className='text-5xl uppercase font-bold cursor-default'>This Is <span className='underline text-neutral-400 hover:text-white'>Post Detales</span> page.</h1>
-            <div className="grid place-content-center gap-5 w-2/6 mx-auto my-8 ">
+          <h1 className=' text-center text-3xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl uppercase font-bold cursor-default'><span className='underline text-neutral-400 hover:text-white'>Post Detales</span></h1>
+            <div className="grid place-content-center gap-5 max-w-[500px] mx-5 my-8 ">
             
-                <div id={post.id} className={`all-post text-xl w-full text-left flex items-start justify-start flex-col gap-1 p-5 rounded-xl bg-zinc-700 overflow-hidden hover:bg-zinc-800 hover:border-2 hover:border-zinc-600 border-2 border-transparent cursor-pointer select-none transition-all hover:text-slate-100`}>
+                <div id={post.id} className={`all-post text-sm sm:txt-md md:text-lg lg:text-lg xl:text-xl w-full text-left flex items-start justify-start flex-col gap-1 p-5 rounded-xl bg-zinc-700 overflow-hidden hover:bg-zinc-800 hover:border-2 hover:border-zinc-600 border-2 border-transparent cursor-pointer select-none transition-all hover:text-slate-100`}>
                   <h4 className="px-3 py-1 rounded-md">UserId: {post.userId}</h4>
                   <h4 className="px-3 py-1 rounded-md">Id: {post.id}</h4>
                   <h4 className="px-3 py-1 rounded-md">Title: {post.title}</h4>
@@ -25,10 +25,7 @@ export default function Posts({post, urlId, pros}) {
   )
 }
 export async function getStaticPaths() {
-  const vercelUrl = process.env.VERCEL_URL;
-  const apiHost = vercelUrl ? `https://${vercelUrl}` : 'http://127.0.0.1:3000';
-
-  const res = await fetch(`${apiHost}/api/hello`)
+  const res = await fetch("https://jsonplaceholder.typicode.com/posts")
   const data = await res.json()
   const paths = data.map(d => {
         return {
@@ -43,10 +40,7 @@ export async function getStaticPaths() {
 
 
 export async function getStaticProps(context) {
-  const vercelUrl = process.env.VERCEL_URL;
-  const apiHost = vercelUrl ? `https://${vercelUrl}` : 'http://127.0.0.1:3000';
-
-  const res = await fetch(`${apiHost}/api/hello`)
+  const res = await fetch("https://jsonplaceholder.typicode.com/posts")
   const data = await res.json()
   return{
     props: {
